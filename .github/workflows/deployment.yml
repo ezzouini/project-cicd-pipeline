@@ -10,9 +10,9 @@ jobs:
     - name: Upload ftp
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
-        server: ${{ secrets.ABDELILAH_HOSTINGER_FTP_PASSWORD }}
-        username: ${{ secrets.ABDELILAH_HOSTINGER_FTP_SERVER }}
-        password: ${{ secrets.ABDELILAH_HOSTINGER_FTP_USERNAME }}
+        server: ${{ secrets.ABDELILAH_HOSTINGER_FTP_SERVER }}
+        username: ${{ secrets.ABDELILAH_HOSTINGER_FTP_USERNAME }}
+        password: ${{ secrets.ABDELILAH_HOSTINGER_FTP_PASSWORD }}
     - name: running command ssh
       uses: appleboy/ssh-action@master
       with:
@@ -22,4 +22,4 @@ jobs:
         port: ${{ secrets.ABDELILAH_HOSTINGER_SSH_PORT }}
         script: |
           cd domains/abezdev.com/public_html
-          composer install
+          composer2 install
