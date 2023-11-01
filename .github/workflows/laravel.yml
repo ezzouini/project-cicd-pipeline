@@ -33,3 +33,14 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
+      
+    # Create a success file to signal the completion of the testing
+    - name: Create success file
+      run: echo "Testing Successful" > testing_success.txt
+
+    # Upload the success file as an artifact
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: testing_success.txt

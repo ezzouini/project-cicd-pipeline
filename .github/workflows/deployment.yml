@@ -1,17 +1,15 @@
-name: cpanellaravel
+name: laravel_deployment
+
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_run:
-    workflows: ["Laravel_test"]
+    workflows: ["Laravel_testing"]
     types:
       - completed
 
 jobs:
   deploy:
     name: Deploy
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
     - name: Set up Node.js
@@ -21,7 +19,7 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
     - name: Upload ftp
-      uses: SamKirkland/FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: 82.180.138.126
         username: u196071173.abezdev
