@@ -5,6 +5,10 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16  # Specify Node.js version 16
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
     - name: Upload ftp
