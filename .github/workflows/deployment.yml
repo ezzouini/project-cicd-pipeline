@@ -1,0 +1,25 @@
+name: cpanellaravel
+on: push
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    - name: Upload ftp
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ${{ secrets.ABDELILAH_HOSTINGER_FTP_PASSWORD }}
+        username: ${{ secrets.ABDELILAH_HOSTINGER_FTP_SERVER }}
+        password: ${{ secrets.ABDELILAH_HOSTINGER_FTP_USERNAME }}
+    - name: running command ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.ABDELILAH_HOSTINGER_SSH_SERVER }}
+        username: ${{ secrets.ABDELILAH_HOSTINGER_SSH_USERNAME }}
+        password: ${{ secrets.ABDELILAH_HOSTINGER_SSH_PASSWORD }}
+        port: ${{ secrets.ABDELILAH_HOSTINGER_SSH_PORT }}
+        script: |
+          cd domains/almossaid.com/public_html/
+          composer install
