@@ -21,5 +21,5 @@ jobs:
         password: ${{ secrets.ABDELILAH_HOSTINGER_SSH_PASSWORD }}
         port: ${{ secrets.ABDELILAH_HOSTINGER_SSH_PORT }}
         script: |
-          cd domains/almossaid.com/public_html/
+          cd domains/almossaid.com/public_html/cicd-pipeline/
           composer install
