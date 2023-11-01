@@ -1,5 +1,14 @@
 name: cpanellaravel
-on: push
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_run:
+    workflows: ["Laravel_test"]
+    types:
+      - completed
+
 jobs:
   deploy:
     name: Deploy
@@ -12,7 +21,7 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
     - name: Upload ftp
-      uses: SamKirkland/FTP-Deploy-Action@4.3.4
+      uses: SamKirkland/FTP-Deploy-Action
       with:
         server: 82.180.138.126
         username: u196071173.abezdev
