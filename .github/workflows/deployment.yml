@@ -12,9 +12,9 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
     - name: Upload ftp
-      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      uses: SamKirkland/FTP-Deploy-Action@4.3.4
       with:
-        server: abezdev.com
+        server: 82.180.138.126
         username: u196071173.abezdev
         password: Abdelilah@066277460
     - name: running command ssh
