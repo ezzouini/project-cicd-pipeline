@@ -1,36 +1,22 @@
-name: laravel_deployment
-
+name: Laravel-deployment
 on:
-  workflow_run:
-    workflows: ["Laravel_testing"]
-    types:
-      - completed
-
+  push:
+    branches:
+      - main
 jobs:
   deploy:
-    name: Deploy
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16  # Specify Node.js version 16
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-    - name: Upload ftp
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      with:
-        server: 82.180.138.126
-        username: u196071173.abezdev
-        password: Abdelilah@066277460
-    - name: running command ssh
-      uses: appleboy/ssh-action@master
-      with:
-        host: 82.180.138.126
-        username: u196071173
-        password: Abdelilah@066277460
-        port: 65002
-        script: |
-          cd domains/abezdev.com/public_html
-          composer2 install
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Deployment
+        uses: appleboy/ssh-action
+        with:
+          host: ${{ secrets.ABDELILAH_HOSTINGER_SSH_SERVER }}
+          username: ${{ secrets.ABDELILAH_HOSTINGER_SSH_USERNAME }}
+          password: ${{ secrets.ABDELILAH_HOSTINGER_SSH_PASSWORD }}
+          port: ${{ secrets.ABDELILAH_HOSTINGER_SSH_PORT }}
+          script: |
+            cd domains/abezdev.com/public_html 
+            git checkout -f
+            git pull
